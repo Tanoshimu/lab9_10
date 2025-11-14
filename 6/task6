@@ -1,0 +1,26 @@
+def ternary_search(arr, target, left=0, right=None):
+    if right is None:
+        right = len(arr) - 1
+
+    if left > right:
+        return -1
+
+    # Делим на 3 части
+    mid1 = left + (right - left) // 3
+    mid2 = right - (right - left) // 3
+
+    if arr[mid1] == target:
+        return mid1
+    if arr[mid2] == target:
+        return mid2
+
+    if target < arr[mid1]:
+        return ternary_search(arr, target, left, mid1 - 1)
+    elif target > arr[mid2]:
+        return ternary_search(arr, target, mid2 + 1, right)
+    else:
+        return ternary_search(arr, target, mid1 + 1, mid2 - 1)
+
+
+# Пример
+print(ternary_search([1,2,3,4,5,6,7,8,9], 8))
