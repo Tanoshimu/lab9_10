@@ -1,0 +1,30 @@
+def bucket_sort(arr):
+    if len(arr) == 0:
+        return arr
+
+    # 1. Создаём нужное количество корзин
+    num_buckets = 10
+    buckets = [[] for _ in range(num_buckets)]
+
+    # 2. Распределяем элементы по корзинам
+    for value in arr:
+        index = int(value * num_buckets)   # функция распределения
+        if index == num_buckets:           # защита от случая value == 1.0
+            index -= 1
+        buckets[index].append(value)
+
+    # 3. Сортируем каждую корзину (здесь — встроенной сортировкой)
+    for i in range(num_buckets):
+        buckets[i].sort()
+
+    # 4. Собираем всё обратно в один список
+    sorted_arr = []
+    for bucket in buckets:
+        sorted_arr.extend(bucket)
+
+    return sorted_arr
+
+
+# Пример использования
+data = [0.12, 0.55, 0.33, 0.99, 0.02, 0.41, 0.73, 0.27]
+print(bucket_sort(data))
