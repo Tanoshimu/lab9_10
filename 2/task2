@@ -1,0 +1,22 @@
+def flip(arr, k):
+    return arr[:k+1][::-1] + arr[k+1:]
+
+
+def pancake_sort(arr):
+    n = len(arr)
+    for size in range(n, 1, -1):
+        # Находим индекс максимального элемента
+        max_idx = arr.index(max(arr[:size]))
+
+        # Переворачиваем, чтобы макс стал первым
+        if max_idx != 0:
+            arr = flip(arr, max_idx)
+
+        # Переворачиваем, чтобы макс перешёл в конец
+        arr = flip(arr, size - 1)
+
+    return arr
+
+
+# Пример
+print(pancake_sort([3, 6, 2, 7, 4]))
